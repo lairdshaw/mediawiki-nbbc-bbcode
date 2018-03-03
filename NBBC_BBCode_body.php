@@ -15,7 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/*  Version 1.0.
+/*  Version 1.0.1
  */
 
 function nbbc_iurl_tag($bbcode, $action, $name, $default, $params, $content) {
@@ -85,6 +85,9 @@ class NBBC_BBCode {
 
 		if (!$NBBC_BBCode_ParseWithinTagOnly) {
 			$bbcode = self::getBBCodeSingleton();
+			// Don't convert the newlines in the existing HTML output to <br>s -
+			// that would mess up the output with extraneous blank lines.
+			$bbcode->setIgnoreNewlines(true);
 			$text = $bbcode->Parse($text);
 		}
 
